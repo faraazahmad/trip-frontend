@@ -1,0 +1,93 @@
+@charset "utf-8";
+@import '../node_modules/react-diff-view/style/index.css';
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+// Brand colors
+// $dark-orange: #E07A5F;
+// $dark-blue: #3D405B;
+// $green: #81B29A;
+// $yellow: #F2CC8F;
+$first: #355070;
+$second: #6D597A;
+$third: #B56576;
+$fourth: #E56B6F;
+$fifth: #EAAC8B;
+$cream: #F4F1DE;
+
+.logo {
+    font-weight: bold;
+}
+
+.submission-list-item {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    border: solid 1px #efefef;
+    margin-bottom: 1rem;
+}
+
+.submission-list-item:hover {
+    border-color: gold;
+}
+
+.navbar{
+    .navbar-item{
+        color: $first !important;
+        margin: 0.5rem;
+        border-radius: 0.3rem;
+        padding: 0 1rem;
+
+        &:hover {
+            background-color: lighten($fourth, 30);
+        }
+    }
+}
+
+.file-diff {
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    margin-bottom: 10px;
+}
+
+.diff-header {
+    font-size: 16px;
+    padding: 5px 10px;
+    line-height: 2;
+    font-weight: bold;
+    background-color: #fafbfc;
+    border-bottom: 1px solid #ddd;
+}
+
+.hunk-header {
+    background-color: #f0f8ff;
+    color: #1b1f2380;
+    padding: 5px 20px;
+}
+
+.box.auth {
+    padding: 2rem;
+}
+
+.title.styled {
+    font-family: 'Staatliches', cursive;
+}
+
+.hero.is-first {
+    background-color: $first;
+    
+    .title, .subtitle {
+        color: $cream;
+    }
+}
+
+.button.is-fourth {
+    background-color: $fourth;
+    color: #fff;
+    border-color: $fourth;
+    &:hover {
+        background-color: darken($fourth, 2.5);
+        border-color: darken($fourth, 2.5);
+        color: #fff;
+    }
+}
+
+@import "../node_modules/bulma/bulma.sass";

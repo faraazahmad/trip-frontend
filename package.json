@@ -1,0 +1,21 @@
+{
+  "name": "trip-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "bulma": "^0.9.2",
+    "jwt-decode": "^3.1.2",
+    "next": "10.2.2",
+    "next-auth": "^3.24.0",
+    "node-sass": "^6.0.0",
+    "react": "17.0.2",
+    "react-diff-view": "^2.4.7",
+    "react-dom": "17.0.2",
+    "react-syntax-highlighter": "^15.4.3"
+  }
+}
