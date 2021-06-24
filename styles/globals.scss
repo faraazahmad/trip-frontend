@@ -1,18 +1,23 @@
 @charset "utf-8";
 @import '../node_modules/react-diff-view/style/index.css';
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import "../node_modules/bulma/bulma.sass";
 
 // Brand colors
 // $dark-orange: #E07A5F;
 // $dark-blue: #3D405B;
 // $green: #81B29A;
-// $yellow: #F2CC8F;
+$yellow: #F2CC8F;
 $first: #355070;
-$second: #6D597A;
+$second: #480ca8;
 $third: #B56576;
 $fourth: #E56B6F;
 $fifth: #EAAC8B;
 $cream: #F4F1DE;
+
+@mixin dropShadow($color, $lighten) {
+    filter: drop-shadow(0 0.1rem 0.5rem lighten($color, $lighten));
+}
 
 .logo {
     font-weight: bold;
@@ -34,10 +39,11 @@ $cream: #F4F1DE;
         color: $first !important;
         margin: 0.5rem;
         border-radius: 0.3rem;
-        padding: 0 1rem;
+        margin: 1rem;
+        transition: ease-out background-color 0.15s;
 
         &:hover {
-            background-color: lighten($fourth, 30);
+            background-color: lighten($yellow, 20);
         }
     }
 }
@@ -71,12 +77,69 @@ $cream: #F4F1DE;
     font-family: 'Staatliches', cursive;
 }
 
+
+.hero.is-jumbo {
+    padding: 2rem;
+    border-radius: 0.5rem;
+    color: inherit;
+}
+
+.is-jumbo.is-first {
+    @include dropShadow($first, 40);
+}
+.is-jumbo.is-fourth {
+    @include dropShadow($fourth, 15);
+}
+.is-jumbo.is-second {
+    @include dropShadow($second, 20);
+}
+
 .hero.is-first {
     background-color: $first;
     
     .title, .subtitle {
         color: $cream;
     }
+}
+
+.hero.is-fifth {
+    background-color: lighten($fifth, 20) !important;
+}
+
+.hero.is-second {
+    background-color: $second;
+    .title, .subtitle {
+        color: $cream !important;
+    }
+}
+
+.hero.is-fourth {
+    background-color: $fourth;
+    .title, .subtitle {
+        color: #fff;
+    }
+}
+
+.has-text-fourth  {
+    color: $fourth !important;
+}
+
+.has-text-cream {
+    color: $cream
+}
+
+.hero.is-jumbo {
+    .box {
+        padding: 1rem;
+        background-color: rgba(0,0,0,0.3);
+    }
+}
+
+.job.box {
+    background-color: lighten($cream, 5);
+    color: rgba(0,0,0,0.7);
+    box-shadow: none;
+    @include dropShadow($cream, 5);
 }
 
 .button.is-fourth {
@@ -90,4 +153,12 @@ $cream: #F4F1DE;
     }
 }
 
-@import "../node_modules/bulma/bulma.sass";
+.explore .job.box {
+    width: 20rem;
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+.dropdown-menu * {
+    position: relative;
+}

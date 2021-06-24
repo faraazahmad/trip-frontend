@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client';
+import { useEffect } from 'react';
 
 export default function Header() {
     const [session, loadng] = useSession();
@@ -19,8 +20,9 @@ export default function Header() {
 
                 <div className="navbar-menu ">
                     <div className="navbar-start">
-                        <Link href='/problems'><a className='navbar-item'>Problems</a></Link>
                         <Link href='/companies'><a className='navbar-item'>Companies</a></Link>
+                        <Link href='/explore'><a className='navbar-item'>Explore</a></Link>
+                        <Link href='/problems'><a className='navbar-item'>Problems</a></Link>
                     </div>
 
                     <div className="navbar-end">
