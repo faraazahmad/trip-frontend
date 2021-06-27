@@ -20,8 +20,8 @@ function Company({ company }) {
             },
             body: JSON.stringify({name, about})
         });
-        const data = await res.json();
         if (res.status !== 200) {
+            const data = await res.json();
             setErrors(data);
         } else {
             router.push(`/companies/${company.id}/`);

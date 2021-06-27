@@ -2,9 +2,7 @@ import { useSession, getSession } from 'next-auth/client';
 import Link from 'next/link';
 import Header from '../header'
 
-function Problem({ problem, submissions, tech }) {
-    const [session, loading] = useSession();
-
+function Problem({ problem, submissions, tech, session }) {
     const getTagStatusClass = (submission) => {
         switch (submission.status) {
             case "Passed": return "is-success";
@@ -35,8 +33,6 @@ function Problem({ problem, submissions, tech }) {
         </li>
     ))
 
-    if (typeof window !== 'undefined' && loading) return null;
-
     if (session) {
         return (
             <div>
@@ -46,7 +42,7 @@ function Problem({ problem, submissions, tech }) {
                         <div className="columns is-vcentered">
                             <div className="column has-text-left">
                                 <p className="title">{problem.title}</p>
-                                <p className="subtitle">{tech.name}</p>
+                                <p className="subtitle">{problem.tech}</p>
                             </div>
                             <div className="column is-one-quarter has-text-right">
                                 <button onClick={() => downloadFiles()} className='button is-warning'>Download project files</button>
@@ -94,6 +90,10 @@ export async function getServerSidePaths(context) {
 export async function getServerSideProps(context) {
     const session = await getSession(context);
 
+    if (!session) {
+        return { props: {} };
+    }
+
     // params contains the post `id`.
     // If the route is like /posts/1, then params.id is 1
     const res = await fetch(`http://localhost:8000/api/problem/${context.params.problemId}/`, {
@@ -109,16 +109,9 @@ export async function getServerSideProps(context) {
         }
     });
     const submissions = await subRes.json();
-
-    const techRes = await fetch(`http://localhost:8000/api/tech/${problem.tech_id}/`, {
-        headers: {
-            'Authorization': `Bearer ${session.tokens.access}`
-        }
-    });
-    const tech = await techRes.json();
   
     // Pass post data to the page via props
-    return { props: { problem, submissions, tech } }
+    return { props: { problem, submissions, session } }
 }
 
 export default Problem;

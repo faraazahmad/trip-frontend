@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import '../node_modules/react-diff-view/style/index.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 @import "../node_modules/bulma/bulma.sass";
 
@@ -16,7 +17,7 @@ $fifth: #EAAC8B;
 $cream: #F4F1DE;
 
 @mixin dropShadow($color, $lighten) {
-    filter: drop-shadow(0 0.1rem 0.5rem lighten($color, $lighten));
+    box-shadow: 0 0.1rem 0.5rem lighten($color, $lighten);
 }
 
 .logo {
@@ -35,16 +36,22 @@ $cream: #F4F1DE;
 }
 
 .navbar{
-    .navbar-item{
-        color: $first !important;
-        margin: 0.5rem;
+    .navbar-start .navbar-item{
+        color: $first;
         border-radius: 0.3rem;
-        margin: 1rem;
         transition: ease-out background-color 0.15s;
 
         &:hover {
             background-color: lighten($yellow, 20);
         }
+    }
+    
+    .navbar-item {
+        margin: 1rem;
+    }
+
+    .navbar-brand *{
+        color: $fourth;
     }
 }
 
@@ -120,12 +127,19 @@ $cream: #F4F1DE;
     }
 }
 
+.hero.is-cream {
+    background-color: $cream;
+    .title, .subtitle {
+        color: rgba(0,0,0,0.7);
+    }
+}
+
 .has-text-fourth  {
     color: $fourth !important;
 }
 
 .has-text-cream {
-    color: $cream
+    color: $cream !important;
 }
 
 .hero.is-jumbo {
@@ -161,4 +175,9 @@ $cream: #F4F1DE;
 
 .dropdown-menu * {
     position: relative;
+}
+
+.dashboard.box {
+    box-shadow: none !important;
+    border: solid 2.5px #eee;
 }
