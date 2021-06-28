@@ -5,9 +5,7 @@ import Link from "next/link";
 import Header from '../header';
 import { xcode } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
-export default function Submission({submission, problem}) {
-    const [session, loading] = useSession();
-
+export default function Submission({submission, problem, session}) {
     const files = parseDiff(submission.diff, {
         nearbySequences: "zip"
     });
@@ -80,7 +78,7 @@ export async function getServerSideProps(context) {
     const problem = await problemRes.json()
   
     // Pass post data to the page via props
-    return { props: { submission, problem } }
+    return { props: { submission, problem, session } }
 }
 
 export async function getServerSidePaths(context) {

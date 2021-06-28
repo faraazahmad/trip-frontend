@@ -180,4 +180,8 @@ $cream: #F4F1DE;
 .dashboard.box {
     box-shadow: none !important;
     border: solid 2.5px #eee;
+
+    &:hover {
+        border-color: lighten($first, 50);
+    }
 }

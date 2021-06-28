@@ -9,7 +9,7 @@ export default function Header() {
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className='container'>
                 <div className="navbar-brand">
-                    <Link href='/'><a className='navbar-item logo'>Trip</a></Link>
+                    <Link href='/'><a className='navbar-item logo is-size-5'>Trip</a></Link>
 
                     <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false">
                         <span aria-hidden="true"></span>

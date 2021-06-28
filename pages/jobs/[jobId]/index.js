@@ -4,7 +4,7 @@ import Header from '../../header';
 import ReactMarkdown from "react-markdown";
 import { useState } from 'react';
 
-function Job({ job, company, applications, session }) {
+function Job({ job, company, applications, session, problems }) {
     const [showModal, setShowModal] = useState(false);
     const [message, setMessage] = useState('');
     const [applied, setApplied] = useState(applications.find(app => app.user === session.user.id) !== undefined);
@@ -59,7 +59,7 @@ function Job({ job, company, applications, session }) {
                     <button className="modal-close is-large" onClick={() => setShowModal(false)} aria-label="close"></button>
                 </div>}
                 <Header/>
-                <section className="hero container is-second is-jumbo">
+                <section className="hero container is-small is-second is-jumbo">
                     <div className="hero-body">
                         <div className="columns is-vcentered">
                             <div className="column has-text-left">
@@ -75,7 +75,7 @@ function Job({ job, company, applications, session }) {
                                 </p>
                                 
                             </div>
-                            <div className="column is-one-quarter">
+                            <div className="column is-one-quarter has-text-right">
                                 <p className="subtitle">Compensation</p>
                                 <p className="title">${job.compensation_pa/1000}k</p>
                                 <br/>
@@ -93,6 +93,17 @@ function Job({ job, company, applications, session }) {
                         </div>
                         <div className="column is-one-third jobs-sidebar">
                             {session.user.id === company.admin && <Link href={`/jobs/${job.id}/dashboard`}><a className="button is-fullwidth">Go to Job dashboard</a></Link>}
+                            <h2 className="subtitle">Problemsets to solve</h2>
+                            {problems.map(problem =>
+                                <Link href={`/problems/${problem.id}`}>
+                                    <a>
+                                        <div className="box dashboard">
+                                            <p className="has-text-weight-bold">{problem.title}</p>
+                                            <p>{problem.tech}</p>
+                                        </div>
+                                    </a>
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -151,9 +162,17 @@ export async function getServerSideProps(context) {
         }
     })
     const applications = await applicationRes.json();
+
+    const problemRes = await fetch(`http://localhost:8000/api/problems/`, {
+        headers: {
+            'Authorization': `Bearer ${session.tokens.access}`
+        }
+    })
+    const problems = await problemRes.json();
+    const problemSets = job.problem_sets.split(',').map(x => parseInt(x));
   
     // Pass post data to the page via props
-    return { props: { job, company, applications, session } }
+    return { props: { job, company, applications, session, problems: problems.filter(p => problemSets.indexOf(p.id) !== -1) } }
 }
 
 export default Job;
