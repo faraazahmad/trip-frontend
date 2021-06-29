@@ -13,14 +13,14 @@ export default NextAuth({
             },
 
             async authorize(credentials, req) {
-                const loginRes = await fetch('http://localhost:8000/api/token/', {
+                const loginRes = await fetch(process.env.API_URL + '/token/', {
                     method: 'POST',
                     body: JSON.stringify(credentials),
                     headers: {'Content-Type': 'application/json'},
                 });
                 const tokens = await loginRes.json();
                 const payload = jwt_decode(tokens.access);
-                const user_resp = await fetch(`http://localhost:8000/api/user/${payload.user_id}/`, {
+                const user_resp = await fetch(process.env.API_URL + `/user/${payload.user_id}/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${tokens.access}`

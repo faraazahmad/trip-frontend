@@ -60,7 +60,7 @@ function Company({ company, admin, jobs }) {
 
 export async function getServerSidePaths(context) {
     const session = await getSession(context);
-    const res = await fetch('http://localhost:8000/api/organisations/', {
+    const res = await fetch(process.env.API_URL + '/organisations/', {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
@@ -79,21 +79,21 @@ export async function getServerSideProps(context) {
 
     // params contains the post `id`.
     // If the route is like /posts/1, then params.id is 1
-    const res = await fetch(`http://localhost:8000/api/organisation/${context.params.companyId}/`, {
+    const res = await fetch(process.env.API_URL + `/organisation/${context.params.companyId}/`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
     })
     const company = await res.json();
 
-    const userRes = await fetch(`http://localhost:8000/api/user/${company.admin}/`, {
+    const userRes = await fetch(process.env.API_URL + `/user/${company.admin}/`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
     })
     const admin = await userRes.json();
 
-    const jobRes = await fetch(`http://localhost:8000/api/jobs/?company=${company.id}/`, {
+    const jobRes = await fetch(process.env.API_URL + `/jobs/?company=${company.id}/`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }

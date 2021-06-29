@@ -49,7 +49,7 @@ export async function getServerSideProps(context) {
     }
     // params contains the post `id`.
     // If the route is like /posts/1, then params.id is 1
-    const res = await fetch(`http://localhost:8000/api/organisations/`, {
+    const res = await fetch(process.env.API_URL + `/organisations/`, {
         headers: {
             'Content-Type': 'application/json'
         }

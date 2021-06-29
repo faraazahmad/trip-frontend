@@ -10,7 +10,7 @@ export default function SignUp() {
     const [errors, setErrors] = useState({});
 
     const createUser = async () => {
-        const resp = await fetch('http://localhost:8000/api/users/register/', {
+        const resp = await fetch(process.env.API_URL + '/users/register/', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

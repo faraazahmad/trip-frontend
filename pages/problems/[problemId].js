@@ -80,7 +80,7 @@ function Problem({ problem, submissions, tech, session }) {
 
 export async function getServerSidePaths(context) {
     const session = await getSession(context);
-    const res = await fetch('http://localhost:8000/api/problems', {
+    const res = await fetch(process.env.API_URL + '/problems', {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
@@ -103,14 +103,14 @@ export async function getServerSideProps(context) {
 
     // params contains the post `id`.
     // If the route is like /posts/1, then params.id is 1
-    const res = await fetch(`http://localhost:8000/api/problem/${context.params.problemId}/`, {
+    const res = await fetch(process.env.API_URL + `/problem/${context.params.problemId}/`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
     })
     const problem = await res.json()
 
-    const subRes = await fetch(`http://localhost:8000/api/problem/${problem.id}/submissions?user=${session.user.id}`, {
+    const subRes = await fetch(process.env.API_URL + `/problem/${problem.id}/submissions?user=${session.user.id}`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }

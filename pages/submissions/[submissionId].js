@@ -61,7 +61,7 @@ export default function Submission({submission, problem, session}) {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-    const url = `http://localhost:8000/api/submissions/${context.params.submissionId}/`;
+    const url = process.env.API_URL + `/submissions/${context.params.submissionId}/`;
     // params contains the post `id`.
     // If the route is like /posts/1, then params.id is 1
     const res = await fetch(url, {
@@ -71,7 +71,7 @@ export async function getServerSideProps(context) {
     })
     const submission = await res.json()
 
-    const problemRes = await fetch(`http://localhost:8000/api/problem/${submission.problem}/`, {
+    const problemRes = await fetch(process.env.API_URL + `/problem/${submission.problem}/`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
@@ -84,7 +84,7 @@ export async function getServerSideProps(context) {
 
 export async function getServerSidePaths(context) {
     const session = await getSession(context);
-    const res = await fetch(`http://localhost:8000/api/submissions?user=${session.user.id}`, {
+    const res = await fetch(process.env.API_URL + `/submissions?user=${session.user.id}`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }

@@ -93,7 +93,7 @@ function Job({ job, company, applications, problemSets, applicants, session }) {
 
 export async function getServerSidePaths(context) {
     const session = await getSession(context);
-    const res = await fetch('http://localhost:8000/api/organisations/', {
+    const res = await fetch(process.env.API_URL + '/organisations/', {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
@@ -114,7 +114,7 @@ export async function getServerSideProps(context) {
         return { props: {} };
     }
 
-    const jobRes = await fetch(`http://localhost:8000/api/job/${context.params.jobId}/`, {
+    const jobRes = await fetch(process.env.API_URL + `/job/${context.params.jobId}/`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
@@ -122,21 +122,21 @@ export async function getServerSideProps(context) {
     const job = await jobRes.json();
     const problemSets = job.problem_sets.split(',').map(set => parseInt(set));
 
-    const companyRes = await fetch(`http://localhost:8000/api/organisation/${job.organisation}/`, {
+    const companyRes = await fetch(process.env.API_URL + `/organisation/${job.organisation}/`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
     })
     const company = await companyRes.json();
 
-    const applicationRes = await fetch(`http://localhost:8000/api/applications/?job=${job.id}`, {
+    const applicationRes = await fetch(process.env.API_URL + `/applications/?job=${job.id}`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }
     })
     const applications = await applicationRes.json();
 
-    const appUsersRes = await fetch(`http://localhost:8000/api/job/${job.id}/users/`, {
+    const appUsersRes = await fetch(process.env.API_URL + `/job/${job.id}/users/`, {
         headers: {
             'Authorization': `Bearer ${session.tokens.access}`
         }

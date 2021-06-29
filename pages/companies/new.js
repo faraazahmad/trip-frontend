@@ -17,7 +17,7 @@ function CompaniesNew() {
     if (typeof window !== 'undefined' && loading) return null;
 
     const createCompany = async () => {
-        const res = await fetch('http://localhost:8000/api/organisation/new/', {
+        const res = await fetch(process.env.API_URL + '/organisation/new/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
