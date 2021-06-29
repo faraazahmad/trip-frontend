@@ -4,11 +4,12 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import Link from "next/link";
 import Header from '../header';
 import { xcode } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { useMemo } from "react";
 
 export default function Submission({submission, problem, session}) {
-    const files = parseDiff(submission.diff, {
+    const files = useMemo(() => parseDiff(submission.diff, {
         nearbySequences: "zip"
-    });
+    }))
 
     const renderFile = ({oldPath, newPath, oldRevision, newRevision, type, hunks}) => (
         <div key={oldRevision + '-' + newRevision} className="file-diff">

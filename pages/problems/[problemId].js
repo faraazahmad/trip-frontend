@@ -1,5 +1,6 @@
 import { useSession, getSession } from 'next-auth/client';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import Header from '../header'
 
 function Problem({ problem, submissions, tech, session }) {
@@ -37,7 +38,7 @@ function Problem({ problem, submissions, tech, session }) {
         return (
             <div>
                 <Header/>
-                <section className="hero container">
+                <section className="hero container is-jumbo is-first">
                     <div className="hero-body">
                         <div className="columns is-vcentered">
                             <div className="column has-text-left">
@@ -45,7 +46,11 @@ function Problem({ problem, submissions, tech, session }) {
                                 <p className="subtitle">{problem.tech}</p>
                             </div>
                             <div className="column is-one-quarter has-text-right">
-                                <button onClick={() => downloadFiles()} className='button is-warning'>Download project files</button>
+                                <button onClick={() => downloadFiles()} className='button is-fourth'>
+                                    <i className="icon fas fa-download"></i>
+                                    &emsp;
+                                    Download project files
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -53,7 +58,9 @@ function Problem({ problem, submissions, tech, session }) {
                 <hr/>
                 <div className="container">
                     <div className="columns">
-                        <div className="column">{problem.description || "Hmmm... There doesn't seem to be a description for this problem."}</div>
+                        <div className="column content">{problem.description ?
+                        <ReactMarkdown>{problem.description}</ReactMarkdown> :
+                        "Hmmm... There doesn't seem to be a description for this problem."}</div>
                         <div className="column is-one-third">
                             <h2 className="subtitle">Your submissions</h2>
                             <ul>

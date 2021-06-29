@@ -53,9 +53,9 @@ function Job({ job, company, applications, problemSets, applicants, session }) {
                         </div>
                         <div className="column">
                             <div className="box dashboard">
-                                <i className="has-text-success fas fa-check-circle"></i>
+                                <i className="has-text-info fas fa-info-circle"></i>
                                 &emsp;
-                                Culture-fit interview
+                                Culture-fit interview (Coming soon)
                             </div>
                         </div>
                     </div>

@@ -158,7 +158,7 @@ $cream: #F4F1DE;
 
 .button.is-fourth {
     background-color: $fourth;
-    color: #fff;
+    color: $cream;
     border-color: $fourth;
     &:hover {
         background-color: darken($fourth, 2.5);
